@@ -34,4 +34,3 @@ Example:
 def get_user_name(user_id):
 user_name = get_user_name_from_db(user_id)
 return "<H1 id='user'>" + user_name + "</H1>"
-
