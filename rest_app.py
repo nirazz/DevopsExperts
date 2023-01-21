@@ -2,6 +2,9 @@ from flask import Flask, request
 from werkzeug.exceptions import BadRequest
 from db_connector import add_user, update_user, fetch_user_name, delete_user
 
+import os
+import signal
+
 app = Flask(__name__)
 
 
@@ -60,6 +63,12 @@ def user(user_id):
             user_name = fetch_user_name(user_id)
             delete_user(user_id)
             return {'user id': user_id, 'user name': user_name, 'status': 'deleted'}, 200
+
+
+@app.route('/stop_server')
+def stop_server():
+    os.kill(os.getpid(), signal.CTRL_C_EVENT)
+    return 'Server stopped'
 
 
 app.run(host='127.0.0.1', debug=True, port=5000)
