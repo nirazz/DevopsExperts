@@ -8,11 +8,11 @@ pipeline {
                 }
             }
         }
-        stage('Pull code') {
-            steps {
-                git url: 'https://github.com/nirazz/DevopsExperts.git'
-            }
-        }
+//         stage('Pull code') {
+//             steps {
+//                 git url: 'https://github.com/nirazz/DevopsExperts.git'
+//             }
+//         }
         stage('Run backend') {
             steps {
                 script {
