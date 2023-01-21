@@ -1,5 +1,7 @@
+def python_path = '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3'
+env.PATH = "${env.PATH}:${python_path}"
+
 pipeline {
-    def python_path = '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3'
     agent any
     stages {
         stage('checkout') {
@@ -17,7 +19,6 @@ pipeline {
         stage('Run backend') {
             steps {
                 script {
-                    env.PATH = "${env.PATH}:${python_path}"
                     if (checkOs() == 'Windows') {
                         bat "${python_path} rest_app.py"
                     } else {
@@ -29,7 +30,6 @@ pipeline {
         stage('Run frontend') {
             steps {
                 script {
-                    env.PATH = "${env.PATH}:${python_path}"
                     if (checkOs() == 'Windows') {
                         bat "${python_path} web_app.py"
                     } else {
