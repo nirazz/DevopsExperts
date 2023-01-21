@@ -18,9 +18,9 @@ pipeline {
                 script {
                     env.PATH = "${env.PATH}:/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin"
                     if (checkOs() == 'Windows') {
-                        bat 'python3 rest_app.py'
+                        bat '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 rest_app.py'
                     } else {
-                        sh 'nohup python3 rest_app.py &'
+                        sh 'nohup /home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 rest_app.py &'
                     }
                 }
             }
@@ -30,31 +30,31 @@ pipeline {
                 script {
                     env.PATH = "${env.PATH}:/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin"
                     if (checkOs() == 'Windows') {
-                        bat 'python3 web_app.py'
+                        bat '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 web_app.py'
                     } else {
-                        sh 'nohup python3 web_app.py &'
+                        sh 'nohup /home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 web_app.py &'
                     }
                 }
             }
         }
         stage('Run backend tests') {
             steps {
-                sh 'python3 backend_testing.py'
+                sh '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 backend_testing.py'
             }
         }
         stage('Run frontend tests') {
             steps {
-                sh 'python3 frontend_testing.py'
+                sh '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 frontend_testing.py'
             }
         }
         stage('Run combined tests') {
             steps {
-                sh 'python3 combined_testing.py'
+                sh '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 combined_testing.py'
             }
         }
         stage('Clean environment') {
             steps {
-                sh 'python3 clean_environment.py'
+                sh '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 clean_environment.py'
             }
         }
     }
