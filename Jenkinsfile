@@ -1,6 +1,3 @@
-def python_path = '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3'
-env.PATH = "${env.PATH}:${python_path}"
-
 pipeline {
     agent any
     stages {
@@ -11,18 +8,19 @@ pipeline {
                 }
             }
         }
-        stage('Pull code') {
-            steps {
-                git url: 'https://github.com/nirazz/DevopsExperts.git'
-            }
-        }
+//         stage('Pull code') {
+//             steps {
+//                 git url: 'https://github.com/nirazz/DevopsExperts.git'
+//             }
+//         }
         stage('Run backend') {
             steps {
                 script {
+                    env.PATH = "${env.PATH}:/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin"
                     if (checkOs() == 'Windows') {
-                        bat "${python_path} rest_app.py"
+                        bat '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 rest_app.py'
                     } else {
-                        sh "nohup ${python_path} rest_app.py &"
+                        sh 'nohup /home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 rest_app.py &'
                     }
                 }
             }
@@ -30,32 +28,33 @@ pipeline {
         stage('Run frontend') {
             steps {
                 script {
+                    env.PATH = "${env.PATH}:/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin"
                     if (checkOs() == 'Windows') {
-                        bat "${python_path} web_app.py"
+                        bat '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 web_app.py'
                     } else {
-                        sh "nohup ${python_path} web_app.py &"
+                        sh 'nohup /home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 web_app.py &'
                     }
                 }
             }
         }
         stage('Run backend tests') {
             steps {
-                sh "${python_path} backend_testing.py"
+                sh '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 backend_testing.py'
             }
         }
         stage('Run frontend tests') {
             steps {
-                sh "${python_path} frontend_testing.py"
+                sh '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 frontend_testing.py'
             }
         }
         stage('Run combined tests') {
             steps {
-                sh "${python_path} combined_testing.py"
+                sh '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 combined_testing.py'
             }
         }
         stage('Clean environment') {
             steps {
-                sh "${python_path} clean_environment.py"
+                sh '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 clean_environment.py'
             }
         }
     }
