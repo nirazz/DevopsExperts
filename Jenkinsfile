@@ -16,10 +16,11 @@ pipeline {
         stage('Run backend') {
             steps {
                 script {
+                    env.PATH = "${env.PATH}:/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin"
                     if (checkOs() == 'Windows') {
-                        bat 'python rest_app.py'
+                        bat 'python3 rest_app.py'
                     } else {
-                        sh 'nohup python rest_app.py &'
+                        sh 'nohup python3 rest_app.py &'
                     }
                 }
             }
@@ -27,32 +28,33 @@ pipeline {
         stage('Run frontend') {
             steps {
                 script {
+                    env.PATH = "${env.PATH}:/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin"
                     if (checkOs() == 'Windows') {
-                        bat 'python web_app.py'
+                        bat 'python3 web_app.py'
                     } else {
-                        sh 'nohup python web_app.py &'
+                        sh 'nohup python3 web_app.py &'
                     }
                 }
             }
         }
         stage('Run backend tests') {
             steps {
-                sh 'python backend_testing.py'
+                sh 'python3 backend_testing.py'
             }
         }
         stage('Run frontend tests') {
             steps {
-                sh 'python frontend_testing.py'
+                sh 'python3 frontend_testing.py'
             }
         }
         stage('Run combined tests') {
             steps {
-                sh 'python combined_testing.py'
+                sh 'python3 combined_testing.py'
             }
         }
         stage('Clean environment') {
             steps {
-                sh 'python clean_environment.py'
+                sh 'python3 clean_environment.py'
             }
         }
     }
