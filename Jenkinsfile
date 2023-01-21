@@ -1,7 +1,7 @@
 pipeline {
     agent any
+    def python_path = '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3'
     stages {
-        def python_path = '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3'
         stage('checkout') {
             steps {
                 script {
