@@ -6,6 +6,8 @@ pipeline {
                 script {
                     properties([pipelineTriggers([pollSCM('*/30 * * * *')])])
                 }
+            }
+        }
         stage('Pull code') {
             steps {
                 git url: 'https://github.com/nirazz/DevopsExperts.git'
