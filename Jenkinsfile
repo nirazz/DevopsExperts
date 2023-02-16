@@ -98,7 +98,7 @@ pipeline {
                }
            }
     }
-
+}
 
 def checkOs(){
     if (isUnix()) {
@@ -113,5 +113,4 @@ def checkOs(){
     else {
         return "Windows"
     }
-}
 }
