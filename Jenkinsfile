@@ -53,7 +53,7 @@ pipeline {
                     sh "docker push myflask:${BUILD_NUMBER}"
           }
     }
-        }
+
         stage('Set compose image version') {
             steps {
                 sh "echo IMAGE_TAG=${BUILD_NUMBER} > .env"
