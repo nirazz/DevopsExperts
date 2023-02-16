@@ -46,15 +46,13 @@ pipeline {
             }
         }
         stage('Push Docker image') {
-            environment {
-                DOCKER_HUB_USERNAME = credentials('dockerhubaccount').username
-                DOCKER_HUB_PASSWORD = credentials('dockerhubaccount').password
-            }
             steps {
-                sh "echo $DOCKER_HUB_PASSWORD | docker login -u $DOCKER_HUB_USERNAME --password-stdin"
-                sh "docker push myflask:${BUILD_NUMBER}"
-            }
+                withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
+                        sh "docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD"
+                        }
+                        sh "docker push myflask:${BUILD_NUMBER}"
         }
+    }
 
         stage('Set compose image version') {
             steps {
