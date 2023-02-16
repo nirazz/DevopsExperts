@@ -47,7 +47,7 @@ pipeline {
         }
         stage('Push Docker image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: '1nirazz', usernameVariable: '1nirazz', passwordVariable: 'Kat6886969')]) {
+                withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', usernameVariable: '1nirazz', passwordVariable: 'Kat6886969')]) {
                     sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
                 }
                     sh "docker push myflask:${BUILD_NUMBER}"
