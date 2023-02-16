@@ -38,14 +38,14 @@ pipeline {
                 sh '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 clean_environment.py'
             }
         }
-       stage('Build Docker image') {
+        stage('Build Docker image') {
             steps {
                 dir('/home/nir-raz/PycharmProjects/docker_test/Docker') {
                     sh 'docker build -t myflask:${BUILD_NUMBER} .'
                 }
             }
         }
-      stage('Push Docker image') {
+        stage('Push Docker image') {
             steps {
                 withCredentials([usernamePassword(credentialsId: '1nirazz', usernameVariable: '1nirazz', passwordVariable: 'Kat6886969')]) {
                     sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
