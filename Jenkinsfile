@@ -40,9 +40,8 @@ pipeline {
         }
        stage('Build Docker image') {
             steps {
-                dir('/home/nir-raz/PycharmProjects/docker_test/docker') {
-                    sh 'docker build -t myflask:${BUILD_NUMBER} -f /home/nir-raz/PycharmProjects/docker_test/Dockerfile .'
-
+                dir('/home/nir-raz/PycharmProjects/docker_test/Docker') {
+                    sh 'docker build -t myflask:${BUILD_NUMBER} .'
                 }
             }
         }
