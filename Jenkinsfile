@@ -38,9 +38,11 @@ pipeline {
                 sh '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 clean_environment.py'
             }
         }
-        stage('Build Docker image') {
+       stage('Build Docker image') {
             steps {
-                sh 'docker build -t myflask:${BUILD_NUMBER} .'
+                dir('/home/nir-raz/PycharmProjects/docker_test') {
+                    sh 'docker build -t myflask:${BUILD_NUMBER} .'
+                }
             }
         }
         stage('Push Docker image') {
