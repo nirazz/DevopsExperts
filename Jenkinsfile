@@ -98,7 +98,7 @@ pipeline {
                }
            }
     }
-}
+
 
 def checkOs(){
     if (isUnix()) {
