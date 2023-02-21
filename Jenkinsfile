@@ -70,7 +70,11 @@ pipeline {
             }
             post {
                 always {
-                    sh "docker rmi myflask:${BUILD_NUMBER}"
+                        sh '''
+                        if docker images | grep myflask:44 ; then
+                            docker rmi myflask:44
+                        fi
+                        '''
                 }
             }
         }
