@@ -68,15 +68,15 @@ pipeline {
                     }
                 }
             }
-            post {
-                always {
-                        sh '''
-                        if docker images | grep myflask:44 ; then
-                            docker rmi myflask:44
-                        fi
-                        '''
-                }
-            }
+//             post {
+//                 always {
+//                         sh '''
+//                         if docker images | grep myflask:44 ; then
+//                             docker rmi myflask:44
+//                         fi
+//                         '''
+//                 }
+//             }
         }
 
         stage('Set compose image version') {
