@@ -70,7 +70,7 @@ pipeline {
             }
             post {
                 always {
-                    bat "docker rmi $registry:$BUILD_NUMBER"
+                    bat "docker rmi myflask:$BUILD_NUMBER"
                 }
             }
         }
