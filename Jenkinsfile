@@ -70,7 +70,7 @@ pipeline {
             }
             post {
                 always {
-                    sh "docker rmi my-user/my-repo:${BUILD_NUMBER}"
+                    bat "docker rmi $registry:$BUILD_NUMBER"
                 }
             }
         }
