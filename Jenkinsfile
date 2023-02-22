@@ -94,9 +94,11 @@ environment {
                         }
                     }
                      post {
-                         always {
-                             sh "docker rmi $registry:$BUILD_NUMBER“ // delete the local image at the end
-            }}
+                        always {
+                                sh "docker rmi $registry:$BUILD_NUMBER"
+                                }}}
+
+
 //           stage('Build and push Docker image') {
 //             steps {
 //                 script {
