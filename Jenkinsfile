@@ -78,19 +78,27 @@ pipeline {
 //                 }
 //             }
 //         }
-         stage('Build and push Docker image') {
-              steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                  sh """
-                    docker build -t 1nirazz/ex_repo:${BUILD_NUMBER} /home/nir-raz/PycharmProjects/docker_test/Docker
-                    DOCKERHUB_USERNAME=1nirazz
-                    DOCKERHUB_PASSWORD=Kat6886969
-                    docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD} https://registry.hub.docker.com
-                    docker push 1nirazz/ex_repo:${BUILD_NUMBER}
-                  """
+          stage('Build and push Docker image') {
+            steps {
+                script {
+                    def registry = "1nirazz/ex_repo"
+                    def registryCredential = 'dockerhubaccount'
+                    def dockerImage = ''
+
+                    dir('/home/nir-raz/PycharmProjects/docker_test/Docker') {
+                        dockerImage = docker.build("${registry}:${BUILD_NUMBER}")
+                        docker.withRegistry('', registryCredential) {
+                            dockerImage.push()
+                        }
+                    }
                 }
-              }
             }
+            post {
+                always {
+                    sh "docker rmi my-user/my-repo:${BUILD_NUMBER}"
+                }
+            }
+        }
 
 //             docker.withRegistry('https://registry.hub.docker.com', 'dockerhubaccount') {
 //                 def dockerImage = docker.build("1nirazz/ex_repo:${BUILD_NUMBER}", "-f Dockerfile .")
