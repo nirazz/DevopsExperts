@@ -85,7 +85,7 @@ pipeline {
                     docker build -t 1nirazz/ex_repo:${BUILD_NUMBER} /home/nir-raz/PycharmProjects/docker_test/Docker
                     DOCKERHUB_USERNAME=1nirazz
                     DOCKERHUB_PASSWORD=Kat6886969
-                    docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD} https://registry.hub.docker.com
+                    docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD} https://login.docker.com/u/login/identifier?state=hKFo2SBOTTVDUGcyR2U1dGhDcUVoaWhBZGR5cnpDV3NycmxtaaFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIENDNWQ5OFl2YjZBXzRpUzN1QnYyZ1ZwUkNQU1NhWi1So2NpZNkgbHZlOUdHbDhKdFNVcm5lUTFFVnVDMGxiakhkaTluYjk
                     docker push 1nirazz/ex_repo:${BUILD_NUMBER}
                   """
                 }
