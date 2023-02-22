@@ -94,11 +94,11 @@ pipeline {
 //                     }
 //                 }
 //             }
-            post {
-                always {
-                    sh "docker rmi 1nirazz/ex_repo:${BUILD_NUMBER}"
-                }
-            }
+//             post {
+//                 always {
+//                     sh "docker rmi 1nirazz/ex_repo:${BUILD_NUMBER}"
+//                 }
+//             }
 //         }
 
 //             docker.withRegistry('https://registry.hub.docker.com', 'dockerhubaccount') {
