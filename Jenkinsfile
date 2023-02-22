@@ -61,9 +61,9 @@ pipeline {
                     def dockerImage = ''
 
                     dir('/home/nir-raz/PycharmProjects/docker_test/docker') {
-                        dockerImage = docker.build("${registry}:${BUILD_NUMBER}")
-                        docker.withRegistry('', registryCredential) {
-                            dockerImage.push()
+                       dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                       docker.withRegistry('', registryCredential) {
+                       dockerImage.push()
                         }
                     }
                 }
