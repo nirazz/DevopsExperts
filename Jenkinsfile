@@ -3,11 +3,6 @@ pipeline {
 //     options {
 //     buildDiscarder(logRotator(numToKeepStr: '20', daysToKeepStr: '5'))
 //   }
-environment {
-        registry = "1nirazz/ex_repo"
-        registryCredential = 'dockerhubaccount'
-        dockerImage = ''
-        }
     stages {
         stage('checkout') {
             steps {
@@ -83,37 +78,21 @@ environment {
 //                 }
 //             }
 //         }
+          stage('Build and push Docker image') {
+            steps {
+                script {
+                    def registry = "1nirazz/ex_repo"
+                    def registryCredential = 'dockerhubaccount'
+                    def dockerImage = ''
 
-                    stage('build and push image') {
-                        steps {
-                           script {
-                               dockerImage = docker.build registry + ":$BUILD_NUMBER"
-                               docker.withRegistry('', registryCredential) {
-                               dockerImage.push()
-                                                            }
+                    dir('/home/nir-raz/PycharmProjects/docker_test/Docker') {
+                        dockerImage = docker.build("${registry}:${BUILD_NUMBER}")
+                        docker.withRegistry('', registryCredential) {
+                            dockerImage.push()
                         }
                     }
-                     post {
-                        always {
-                                sh "docker rmi $registry:$BUILD_NUMBER"
-                                }}}
-
-
-//           stage('Build and push Docker image') {
-//             steps {
-//                 script {
-//                     def registry = "1nirazz/ex_repo"
-//                     def registryCredential = 'dockerhubaccount'
-//                     def dockerImage = ''
-//
-//                     dir('/home/nir-raz/PycharmProjects/docker_test/Docker') {
-//                         dockerImage = docker.build("${registry}:${BUILD_NUMBER}")
-//                         docker.withRegistry('', registryCredential) {
-//                             dockerImage.push()
-//                         }
-//                     }
-//                 }
-//             }
+                }
+            }
             post {
                 always {
                     sh "docker rmi my-user/my-repo:${BUILD_NUMBER}"
@@ -169,7 +148,7 @@ environment {
                }
            }
     }
-
+}
 
 def checkOs(){
     if (isUnix()) {
