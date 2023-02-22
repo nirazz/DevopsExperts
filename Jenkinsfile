@@ -95,7 +95,7 @@ pipeline {
             }
             post {
                 always {
-                    sh "docker rmi my-user/my-repo:${BUILD_NUMBER}"
+                    sh "docker rmi 1nirazz/ex_repo:${BUILD_NUMBER}"
                 }
             }
         }
