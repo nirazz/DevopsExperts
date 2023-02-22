@@ -79,20 +79,16 @@ pipeline {
 //             }
 //         }
          stage('Build and push Docker image') {
-            steps {
-                script {
-                    def registry = "1nirazz/ex_repo"
-                    def dockerImage = ''
-
+             steps {
                     withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                        dockerImage = docker.build(registry + ":$BUILD_NUMBER", "--file=/home/nir-raz/PycharmProjects/docker_test/Docker/Dockerfile", "/home/nir-raz/PycharmProjects/docker_test/Docker")
-                        docker.withRegistry("https://registry.hub.docker.com", 'dockerhubaccount') {
-                            dockerImage.push()
-                        }
+                        sh """
+                            docker build -t 1nirazz/ex_repo:${BUILD_NUMBER} /home/nir-raz/PycharmProjects/docker_test/Docker
+                            docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD} https://registry.hub.docker.com
+                            docker push 1nirazz/ex_repo:${BUILD_NUMBER}
+                        """
                     }
                 }
             }
-        }
         stage('Set compose image version') {
             steps {
                 sh "echo IMAGE_TAG=${BUILD_NUMBER} > .env"
