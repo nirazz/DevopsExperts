@@ -84,7 +84,7 @@ pipeline {
                     def registry = "1nirazz/ex_repo"
                     def dockerImage = ''
 
-                    withCredentials([dockerUsernamePassword(credentialsId: 'dockerhubaccount', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                         dockerImage = docker.build registry + ":$BUILD_NUMBER"
                         docker.withRegistry("https://registry.hub.docker.com", 'dockerhubaccount') {
                             dockerImage.push()
