@@ -169,7 +169,7 @@ environment {
                }
            }
     }
-}
+}}
 
 def checkOs(){
     if (isUnix()) {
