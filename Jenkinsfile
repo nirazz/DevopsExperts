@@ -83,7 +83,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                     sh """
                         docker build -t 1nirazz/ex_repo:${BUILD_NUMBER} /home/nir-raz/PycharmProjects/docker_test/Docker
-                        docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD} ${https://registry.hub.docker.com}
+                        docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD} https://registry.hub.docker.com
                         docker push 1nirazz/ex_repo:${BUILD_NUMBER}
                     """
                 }
