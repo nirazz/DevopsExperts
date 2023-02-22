@@ -85,7 +85,7 @@ pipeline {
                     def dockerImage = ''
 
                     withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
-                        dockerImage = docker.build(registry + ":$BUILD_NUMBER", "-f /home/nir-raz/PycharmProjects/docker_test/Docker")
+                        dockerImage = docker.build(registry + ":$BUILD_NUMBER", "-f /home/nir-raz/PycharmProjects/docker_test/Docker/Dockerfile")
                         docker.withRegistry("https://registry.hub.docker.com", 'dockerhubaccount') {
                             dockerImage.push()
                         }
