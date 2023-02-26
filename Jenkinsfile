@@ -154,12 +154,11 @@ pipeline {
 //                 sh '/home/nir-raz/PycharmProjects/REST_API_PROJECT/venv/bin/python3 combined_testing.py'
 //             }
 //         }
-           stage('Clean up Docker resources') {
-               steps {
-                   sh 'docker-compose down'
-                   sh 'docker rmi myflask:${BUILD_NUMBER}'
-               }
-           }
+               stage('Clean up Docker resources') {
+        steps {
+            sh 'docker-compose -f /home/nir-raz/PycharmProjects/DockerRedisPython/docker-compose.yml down'
+        }
+    }
     }
 }
 
