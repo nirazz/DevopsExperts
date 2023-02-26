@@ -48,7 +48,7 @@ pipeline {
             stage('Push Docker image') {
             steps{
       withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', usernameVariable: '1nirazz', passwordVariable: 'Kat6886969')]) {
-        sh "echo $PASSWORD | docker login -u $USERNAME --password-stdin"
+        sh "echo Kat6886969 | docker login -u 1nirazz --password-stdin"
         sh "docker push 1nirazz/ex_repo:${BUILD_NUMBER}"
       }
     }
