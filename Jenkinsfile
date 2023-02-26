@@ -117,21 +117,21 @@ pipeline {
 //                 def dockerImage = docker.build("1nirazz/ex_repo:${BUILD_NUMBER}", "-f Dockerfile .")
 //                 dockerImage.push()
 //             }
-        stage('Set compose image version') {
-            steps {
+            stage('Set compose image version') {
+              steps {
                 sh "echo IMAGE_TAG=${BUILD_NUMBER} > .env"
+              }
             }
-        }
-        stage('Run docker-compose up') {
-            steps {
-                sh 'docker-compose up -d'
+            stage('Run docker-compose up') {
+              steps {
+                sh 'docker-compose -f /home/nir-raz/PycharmProjects/DockerRedisPython/docker-compose.yml up -d'
+              }
             }
-        }
-        stage('Test dockerized app') {
-            steps {
+            stage('Test dockerized app') {
+              steps {
                 sh 'python3 docker_backend_testing.py'
+              }
             }
-        }
 //         stage('Run frontend') {
 //             steps {
 //                 script {
