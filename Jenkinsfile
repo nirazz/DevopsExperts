@@ -45,14 +45,14 @@ pipeline {
                 }
             }
         }
-            stage('Push Docker image') {
-            steps{
-      withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', usernameVariable: '1nirazz', passwordVariable: 'Kat6886969')]) {
-        sh "echo Kat6886969 | docker login -u 1nirazz --password-stdin"
-        sh "docker push 1nirazz/ex_repo:${BUILD_NUMBER}"
-      }
+           stage('Push Docker image') {
+  steps{
+    withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+      sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
+      sh "docker push $DOCKER_USERNAME/ex_repo:${BUILD_NUMBER}"
     }
-    }
+  }
+}
 //         stage('Push Docker image') {
 //             steps {
 //                 sh """
